@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+	<classPathEntry
+		location="D:\work\sts3.3\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\api-crm\WEB-INF\lib\postgresql-9.1-901-1.jdbc4.jar" />
+	<context id="context1">
+		<!-- pagination plugin -->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"/> 
+		<plugin type="org.mybatis.generator.plugin.PaginationPGPlugin"/>
+		<commentGenerator>
+			<!-- 不生成注解信息 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="org.postgresql.Driver"
+			connectionURL="jdbc:postgresql://10.12.7.16:5432/crm_cms" 
+			userId="crm"
+			password="crm" />
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="cn.kane.domain"
+			targetProject="myBatisGene" />
+		<sqlMapGenerator targetPackage="cn.kane.mapper"
+			targetProject="myBatisGene" />
+		<javaClientGenerator targetPackage="cn.kane.mapper"
+			targetProject="myBatisGene" type="XMLMAPPER" />
+		<table schema="crm" tableName="contract_requisition" domainObjectName="ContractRequisition"/>
+<!-- 	<table schema="" tableName="ls_s_role" domainObjectName="Role"/>
+		<table schema="" tableName="ls_s_user_group" domainObjectName="UserGroup"/>
+		<table schema="" tableName="ls_s_role_resource" domainObjectName="RoleResource"/>
+		<table schema="" tableName="ls_s_model" domainObjectName="Model"/>
+		<table schema="" tableName="ls_s_group" domainObjectName="Group"/>
+		<table schema="" tableName="ls_s_role_group" domainObjectName="RoleGroup"/>
+		<table schema="" tableName="ls_s_resource" domainObjectName="Resource">
+			columnOverride column="???" property="???" /
+		</table> -->
+	</context>
+</generatorConfiguration>

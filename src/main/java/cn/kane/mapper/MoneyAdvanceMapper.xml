@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kane.mapper.MoneyAdvanceMapper" >
+  <resultMap id="BaseResultMap" type="cn.kane.domain.MoneyAdvance" >
+    <id column="cont_num" property="contNum" jdbcType="VARCHAR" />
+    <result column="sp_id" property="spId" jdbcType="BIGINT" />
+    <result column="money" property="money" jdbcType="VARCHAR" />
+    <result column="back_money" property="backMoney" jdbcType="VARCHAR" />
+    <result column="is_back" property="isBack" jdbcType="BIT" />
+    <result column="owner_uid" property="ownerUid" jdbcType="INTEGER" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+    <result column="old_id" property="oldId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cont_num, sp_id, money, back_money, is_back, owner_uid, ctime, mtime, old_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kane.domain.MoneyAdvanceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from old.money_advance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+       limit ${limitEnd}  offset ${limitStart} 
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from old.money_advance
+    where cont_num = #{contNum,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from old.money_advance
+    where cont_num = #{contNum,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.kane.domain.MoneyAdvanceExample" >
+    delete from old.money_advance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.kane.domain.MoneyAdvance" >
+    insert into old.money_advance (cont_num, sp_id, money, 
+      back_money, is_back, owner_uid, 
+      ctime, mtime, old_id
+      )
+    values (#{contNum,jdbcType=VARCHAR}, #{spId,jdbcType=BIGINT}, #{money,jdbcType=VARCHAR}, 
+      #{backMoney,jdbcType=VARCHAR}, #{isBack,jdbcType=BIT}, #{ownerUid,jdbcType=INTEGER}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}, #{oldId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kane.domain.MoneyAdvance" >
+    insert into old.money_advance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contNum != null" >
+        cont_num,
+      </if>
+      <if test="spId != null" >
+        sp_id,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="backMoney != null" >
+        back_money,
+      </if>
+      <if test="isBack != null" >
+        is_back,
+      </if>
+      <if test="ownerUid != null" >
+        owner_uid,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+      <if test="mtime != null" >
+        mtime,
+      </if>
+      <if test="oldId != null" >
+        old_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contNum != null" >
+        #{contNum,jdbcType=VARCHAR},
+      </if>
+      <if test="spId != null" >
+        #{spId,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="backMoney != null" >
+        #{backMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="isBack != null" >
+        #{isBack,jdbcType=BIT},
+      </if>
+      <if test="ownerUid != null" >
+        #{ownerUid,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null" >
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oldId != null" >
+        #{oldId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kane.domain.MoneyAdvanceExample" resultType="java.lang.Integer" >
+    select count(*) from old.money_advance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update old.money_advance
+    <set >
+      <if test="record.contNum != null" >
+        cont_num = #{record.contNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spId != null" >
+        sp_id = #{record.spId,jdbcType=BIGINT},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backMoney != null" >
+        back_money = #{record.backMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isBack != null" >
+        is_back = #{record.isBack,jdbcType=BIT},
+      </if>
+      <if test="record.ownerUid != null" >
+        owner_uid = #{record.ownerUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ctime != null" >
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mtime != null" >
+        mtime = #{record.mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.oldId != null" >
+        old_id = #{record.oldId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update old.money_advance
+    set cont_num = #{record.contNum,jdbcType=VARCHAR},
+      sp_id = #{record.spId,jdbcType=BIGINT},
+      money = #{record.money,jdbcType=VARCHAR},
+      back_money = #{record.backMoney,jdbcType=VARCHAR},
+      is_back = #{record.isBack,jdbcType=BIT},
+      owner_uid = #{record.ownerUid,jdbcType=INTEGER},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      mtime = #{record.mtime,jdbcType=TIMESTAMP},
+      old_id = #{record.oldId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.kane.domain.MoneyAdvance" >
+    update old.money_advance
+    <set >
+      <if test="spId != null" >
+        sp_id = #{spId,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="backMoney != null" >
+        back_money = #{backMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="isBack != null" >
+        is_back = #{isBack,jdbcType=BIT},
+      </if>
+      <if test="ownerUid != null" >
+        owner_uid = #{ownerUid,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null" >
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oldId != null" >
+        old_id = #{oldId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where cont_num = #{contNum,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.kane.domain.MoneyAdvance" >
+    update old.money_advance
+    set sp_id = #{spId,jdbcType=BIGINT},
+      money = #{money,jdbcType=VARCHAR},
+      back_money = #{backMoney,jdbcType=VARCHAR},
+      is_back = #{isBack,jdbcType=BIT},
+      owner_uid = #{ownerUid,jdbcType=INTEGER},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      old_id = #{oldId,jdbcType=BIGINT}
+    where cont_num = #{contNum,jdbcType=VARCHAR}
+  </update>
+</mapper>
